@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<odoo>
+    <!-- Form View Of Defaulter Wizard -->
+    <record id="view_cms_wizard_report1_form_id" model="ir.ui.view">
+        <field name="name">cms.wizard.student.report1.form</field>
+        <field name="model">cms.wizard.student.report1</field>
+        <field name="arch" type="xml">
+            <form string="Print Report">
+    			<group>
+					<field name="from_registration_no" filter_domain="[('registration_no','&gt;=',self)]"/>
+					<field name="to_registration_no" filter_domain="[('registration_no','&lt;=',self)]"/>
+                
+   				</group>
+                <!-- <group colspan="4" >
+                        <field name="date_from" filter_domain="[('date_invoice','&gt;=',self)]" />
+                        <field name="date_to" filter_domain="[('date_invoice','&lt;=',self)]"  />
+                    </group> -->
+   				<footer>
+                    <button class="btn btn-sm btn-default fa fa-book" name='print_report1' type='object' string='Print Report'/>
+                </footer>
+           </form>
+        </field>
+    </record>
+    
+    <!-- Act Window For Action Of Student Report-->
+    <record id="action_wizard_report_1_id" model="ir.actions.act_window">
+        <field name="name">Print Report</field>
+        <field name="type">ir.actions.act_window</field>
+    	<field name="res_model">cms.wizard.student.report1</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_cms_wizard_report1_form_id"/>
+        <field name="target">new</field>
+        
+    </record>        
+
+</odoo>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <!-- Form View 1 Of Student's Profiles -->
+    <record id="view_cms_student_form_id" model="ir.ui.view">
+        <field name="name">cms.student.form</field>
+        <field name="model">cms.student</field>
+        <field name="arch" type="xml">
+            <form string="Student Information">
+                <header>
+                    <button class="oe_stat_button" name="set_done" string="Done" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <button class="oe_stat_button" name="set_cancel" string="Cancel" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Student Name" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </h1>
+                     </div>
+                     
+                     <div>
+						<group colspan="4" col="4" string="Student Information">
+                        
+							<field name="father_name" attrs="{'readonly':[('state','!=','draft')]}"/>
+                           
+							<field name="admission_date" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="registration_no" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="bus_no" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="contact_phone" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="gender" attrs="{'readonly':[('state','!=','draft')]}"/>
+							
+							<field name="date_of_birth" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="user_id"/>
+							<field name="age"/>
+							<field name="active" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            
+						</group>
+						
+						<!-- <notebook>
+							<page string="Remarks">
+								<field name="remark"/>
+							</page>
+							<page string="Employees">
+								<field name="employee_ids"/>
+							</page>
+						</notebook> -->
+							
+					</div>
+				</sheet>
+			</form>
+		</field>
+    </record>
+
+<!-- Tree View of Student -->
+    <record id="view_cms_student_tree_id" model="ir.ui.view">
+        <field name="name">student.student.tree</field>
+        <field name="model">cms.student</field>
+        <field name="arch" type="xml">
+            <tree string="Student Information" create="true" delete="false">
+				<field name="name"/>
+                <field name="father_name"/>
+                <field name="admission_date"/>
+                <field name="registration_no"/>
+                <field name="bus_no"/>
+				<field name="gender"/>
+				<field name="date_of_birth"/>
+				
+				<field name="age"/>
+				<field name="contact_phone"/>
+			
+				<field name="user_id" invisible="1"/>
+				<field name="state" invisible="1"/>
+				<field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+<!-- Search View of Student -->
+    <record id="view_cms_student_search_id" model="ir.ui.view">
+        <field name="name">cms.student.search</field>
+        <field name="model">cms.student</field>
+        <field name="arch" type="xml">
+            <search string="Student Information">
+                <group col="10" colspan="4">
+                    <field name="name"/>
+                    <field name="father_name"/>
+                    <field name="admission_date"/>
+                    <field name="registration_no"/>
+                    <field name="bus_no"/>
+                   
+					<field name="gender"/>
+					<field name="date_of_birth"/>
+					
+					<field name="contact_phone"/>
+					
+					<field name="state"/>
+
+                </group>
+                <newline />
+                <group expand="0" string="Group By" colspan="12" col="10">
+                    <!-- <filter name="admission_date" string="Admission Date" help="By Admission Date" context="{'group_by':'admission_date'}" /> -->
+                    <filter name="gender" string="Gender" help="By Gender" context="{'group_by':'gender'}" />
+                    <filter name="state" string="State" help="By State" context="{'group_by':'state'}"/>
+                </group>
+
+                <separator/>
+                <filter name="draft" string="Draft" domain="[('state','=', 'draft')]" help="Admission In Draft State"/>
+                <filter name="done" string="Done" domain="[('state','=', 'done')]" help="Admission In Done State"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state','=', 'cancelled')]" help="Admission In Cancelled State"/>
+            </search>
+        </field>
+    </record>
+
+    <!--Form View of Bus-->
+        <record id="view_cms_bus_form_id" model="ir.ui.view">
+        <field name="name">cms.bus.form</field>
+        <field name="model">cms.bus</field>
+        <field name="arch" type="xml">
+            <form string="Bus Information">
+                <header>
+                   <button class="oe_stat_button" name="set_done" string="Done" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <button class="oe_stat_button" name="set_cancel" string="Cancel" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="bus_number" placeholder="Bus Number" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </h1>
+                     </div>
+                     
+                     <div>
+						<group colspan="4" col="4" string="Bus Information">
+                        
+						
+                           
+							
+							<field name="registration_no" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<!-- <field name="pk_name"  attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<field name="bus_route"/>
+							<field name="active" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            
+						</group>
+						
+						<notebook>
+							<page string="Bus Students">
+								<field name="pk_name"/>
+							</page>
+							
+						</notebook>
+							
+					</div>
+				</sheet>
+			</form>
+		</field>
+    </record>
+    
+
+    <!-- Tree View of Bus -->
+    <record id="view_cms_bus_tree_id" model="ir.ui.view">
+        <field name="name">bus.bus.tree</field>
+        <field name="model">cms.bus</field>
+        <field name="arch" type="xml">
+            <tree string="Bus Information" create="true" delete="false">
+				<field name="bus_number"/>
+                
+               <field name="bus_route"/>
+                <field name="registration_no"/>
+				<field name="pk_name"/>
+				<field name="state" invisible="1"/>
+				<field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    
+    
+    <!--Bus Search View-->
+    
+    <record id="view_cms_bus_search_id" model="ir.ui.view">
+        <field name="name">cms.bus.search</field>
+        <field name="model">cms.bus</field>
+        <field name="arch" type="xml">
+            <search string="Bus Information">
+                <group col="10" colspan="4">
+                    <field name="bus_number"/>
+                   <field name="pk_name"/>
+                  
+                    <field name="registration_no"/>
+					<field name="bus_route"/>
+					<field name="state"/>
+
+                </group>
+                <newline />
+                <group expand="0" string="Group By" colspan="12" col="10">
+                    
+                    <filter name="state" string="State" help="By State" context="{'group_by':'state'}"/>
+                </group>
+
+                <separator/>
+                <filter name="draft" string="Draft" domain="[('state','=', 'draft')]" help="Admission In Draft State"/>
+                <filter name="done" string="Done" domain="[('state','=', 'done')]" help="Admission In Done State"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state','=', 'cancelled')]" help="Admission In Cancelled State"/>
+            </search>
+        </field>
+    </record>
+
+    <!--Form View of Challan-->
+        <record id="view_cms_challan_form_id" model="ir.ui.view">
+        <field name="name">cms.challan.form</field>
+        <field name="model">cms.challan</field>
+        <field name="arch" type="xml">
+            <form string="Challan Information">
+                <header>
+                   <button class="oe_stat_button" name="set_done" string="Done" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <button class="oe_stat_button" name="set_cancel" string="Cancel" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                         <field name="challan_details" placeholder="Student_details" attrs="{'readonly':[('state','!=','draft')]}"/>
+                           
+                        </h1>
+                     </div>
+                     
+                     <div>
+						<group colspan="4" col="4" string="Bus Information">
+                        
+						
+                           
+							
+							<!-- <field name="name" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+                             <field name="challan_number" placeholder="Challan Number" attrs="{'readonly':[('state','!=','draft')]}"/>
+							
+							 <field name="fee" placeholder="Challan Fee" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="active" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            
+						</group>
+						
+						
+							
+					</div>
+				</sheet>
+			</form>
+		</field>
+    </record>
+    
+
+    <!-- Tree View of Challan -->
+    <record id="view_cms_challan_tree_id" model="ir.ui.view">
+        <field name="name">challan.challan.tree</field>
+        <field name="model">cms.challan</field>
+        <field name="arch" type="xml">
+            <tree string="Challan Information" create="true" delete="false">
+				<!-- <field name="name"/> -->
+                
+               <field name="challan_details"/>
+               <field name="fee"/>
+                 <field name="challan_number"/>
+				<field name="state" invisible="1"/>
+				<field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    
+    
+    <!--Challan Search View-->
+    
+    <record id="view_cms_challan_search_id" model="ir.ui.view">
+        <field name="name">cms.challan.search</field>
+        <field name="model">cms.challan</field>
+        <field name="arch" type="xml">
+            <search string="Challan Information">
+                <group col="10" colspan="4">
+                    <!-- <field name="name"/> -->
+                   <field name="challan_details"/>
+                    <field name="challan_number"/>
+					<field name="fee"/>
+					<field name="state"/>
+
+                </group>
+                <newline />
+                <group expand="0" string="Group By" colspan="12" col="10">
+                    
+                    <filter name="state" string="State" help="By State" context="{'group_by':'state'}"/>
+                </group>
+
+                <separator/>
+                <filter name="draft" string="Draft" domain="[('state','=', 'draft')]" help="Admission In Draft State"/>
+                <filter name="done" string="Done" domain="[('state','=', 'done')]" help="Admission In Done State"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state','=', 'cancelled')]" help="Admission In Cancelled State"/>
+            </search>
+        </field>
+    </record>
+    <!--Form View of Route-->
+        <record id="view_cms_route_form_id" model="ir.ui.view">
+        <field name="name">cms.route.form</field>
+        <field name="model">cms.route</field>
+        <field name="arch" type="xml">
+            <form string="Route Information">
+                <header>
+                   <button class="oe_stat_button" name="set_done" string="Done" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <button class="oe_stat_button" name="set_cancel" string="Cancel" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                         <field name="bus_route" placeholder="Bus Route" attrs="{'readonly':[('state','!=','draft')]}"/>
+                           
+                        </h1>
+                     </div>
+                     
+                     <div>
+						<group colspan="4" col="4" string="Route Information">
+                        
+						
+                           
+							
+							<field name="bus_details" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            
+							<field name="active" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            
+						</group>
+						
+						
+							
+					</div>
+				</sheet>
+			</form>
+		</field>
+    </record>
+    
+
+    <!-- Tree View of Route -->
+    <record id="view_cms_route_tree_id" model="ir.ui.view">
+        <field name="name">route.route.tree</field>
+        <field name="model">cms.route</field>
+        <field name="arch" type="xml">
+            <tree string="Route Information" create="true" delete="false">
+				<!-- <field name="name"/> -->
+                
+                <field name="bus_route"/>
+                <field name="bus_details"/>
+
+                
+				<field name="state" invisible="1"/>
+				<field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    
+    
+    <!--Route Search View-->
+    
+    <record id="view_cms_route_search_id" model="ir.ui.view">
+        <field name="name">cms.route.search</field>
+        <field name="model">cms.route</field>
+        <field name="arch" type="xml">
+            <search string="Route Information">
+                <group col="10" colspan="4">
+                    <!-- <field name="name"/> -->
+                   <field name="bus_route"/>
+                    <field name="bus_details"/>
+
+                </group>
+                <newline />
+                <group expand="0" string="Group By" colspan="12" col="10">
+                    
+                    <filter name="state" string="State" help="By State" context="{'group_by':'state'}"/>
+                </group>
+
+                <separator/>
+                <filter name="draft" string="Draft" domain="[('state','=', 'draft')]" help="Admission In Draft State"/>
+                <filter name="done" string="Done" domain="[('state','=', 'done')]" help="Admission In Done State"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state','=', 'cancelled')]" help="Admission In Cancelled State"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Student Record -->
+    <record id="action_cms_student_id" model="ir.actions.act_window">
+        <field name="name">CMS Transport</field>
+        <field name="domain">[('active','=',True)]</field>
+        <field name="res_model">cms.student</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+    <!--Bus Record-->
+    <record id="action_cms_bus_id" model="ir.actions.act_window">
+        <field name="name">CMS Transport</field>
+        <field name="domain">[('active','=',True)]</field>
+        <field name="res_model">cms.bus</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+    <!--Challan Record-->
+    <record id="action_cms_challan_id" model="ir.actions.act_window">
+        <field name="name">CMS Transport</field>
+        <field name="domain">[('active','=',True)]</field>
+        <field name="res_model">cms.challan</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+    <!--Route Record-->
+    <record id="action_cms_route_id" model="ir.actions.act_window">
+        <field name="name">CMS Transport</field>
+        <field name="domain">[('active','=',True)]</field>
+        <field name="res_model">cms.route</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <!-- Top Menu CMS -->
+    <menuitem id="menu_main_campus_id" name="CMS" web_icon="cms_transport,static/description/icon.png" sequence="1" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/>
+    <!-- Menu Student -->
+    <menuitem id="menu_cms_student_main_id" name="CMS Transport" parent="menu_main_campus_id" sequence="1" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/>
+    <menuitem id="menu_cms_student_1" name="Student" parent="menu_cms_student_main_id" action="action_cms_student_id" sequence="21" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/>
+    <menuitem id="menu_cms_student_2" name="Bus" parent="menu_cms_student_main_id" action="action_cms_bus_id" sequence="21" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/>
+    <menuitem id="menu_cms_student_3" name="Challan" parent="menu_cms_student_main_id" action="action_cms_challan_id" sequence="21" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/>
+    <menuitem id="menu_cms_student_4" name="Route" parent="menu_cms_student_main_id" action="action_cms_route_id" sequence="21" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/>
+
+    <!-- Menu Reports -->
+    <menuitem id="menu_cms_student_report_id" name="CMS Reports" parent="menu_main_campus_id" sequence="2" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/>
+    <menuitem id="menu_cms_student_report_1_id" name="Student Report" parent="menu_cms_student_report_id" action="action_wizard_report_1_id" sequence="21" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/>
+    <!-- <menuitem id="menu_cms_student_report_2_id" name="Bus Report" parent="menu_cms_student_report_id" action="action_wizard_report_2_id" sequence="22" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/>
+   
+    <menuitem id="menu_cms_student_report_3_id" name="Challan Report" parent="menu_cms_student_report_id" action="action_wizard_report_3_id" sequence="23" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/>
+     <menuitem id="menu_cms_student_report_4_id" name="Route Report" parent="menu_cms_student_report_id" action="action_wizard_report_4_id" sequence="24" groups="cms_transport.group_campus_administrator,cms_transport.group_campus_user"/> -->
+</odoo>
